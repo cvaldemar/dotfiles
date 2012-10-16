@@ -1,0 +1,4 @@
+#!/bin/bash
+# Simply move downloads older than 1 week to the trash.
+# Add to crontab: 0 * * * *   /home/username/dotfiles/scripts/clear-downloads.sh
+find ~/Downloads -maxdepth 1 -mtime +7 | xargs -I % mv % ~/.local/share/Trash/files

@@ -1,0 +1,14 @@
+#!/bin/bash
+# Simple script to set up tunnel for SqueezeSlave over SSH
+
+# ssh hosts are configured in .ssh/config
+$SSH_HOST=ftt
+$SQUEEZESLAVE_BIN="/opt/squeezeslave/squeezeslave-i64"
+
+# set up port forwarding
+/usr/bin/ssh -fNL 3483:127.0.0.1:3483 $SSH_HOST
+/usr/bin/ssh -fNL 9000:127.0.0.1:9000 $SSH_HOST
+/usr/bin/ssh -fNL 9090:127.0.0.1:9090 $SSH_HOST
+
+# start squeezeslave
+/opt/squeezeslave/squeezeslave-i64 -m00:00:00:00:00:A1

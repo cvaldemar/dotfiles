@@ -1,0 +1,37 @@
+#!/bin/bash
+# Script for running Skype over SOCKS proxy.
+# http://www.aerospacesoftware.com/howtos/skype-ssh-tunnel-howto.html
+
+# Etisalat drops about every tenth packet, which makes Skype sound gritty and
+# buggy. Skype can use a SOCKS proxy, but it has a bug and tends to ignore the
+# proxy setting. The solution is to drop all other traffic to/from Skype and
+# force it to use the proxy.
+
+# Create a group called socksgrp and add yourself to it, then use this group
+# in iptables to drop all other Skype packets, this forces all data to go via the SOCKS
+# proxy.
+
+# $ useradd -G socksgrp username
+# $ gpasswd socksgrp
+
+SKYPEBIN="/usr/bin/skype"
+SOCKSGRP="socksgrp"
+
+SSH_PORT=48080
+SSH_HOST=charlie
+
+# ------------------------------------------------------------------------------
+
+echo " > Setting up SOCKS proxy over SSH"
+/usr/bin/gksu "/usr/bin/killall ssh"
+/usr/bin/ssh -fND $SSH_PORT $SSH_HOST
+
+echo " > Configuring iptables to only allow Skype connections to localhost by filtering on the socksgrp"
+/usr/bin/gksu "/sbin/iptables -F"
+/usr/bin/gksu "/sbin/iptables -A OUTPUT -d 127.0.0.1 -m owner --gid-owner $SOCKSGRP -j ACCEPT"
+/usr/bin/gksu "/sbin/iptables -A OUTPUT ! -d 127.0.0.1 -m owner --gid-owner $SOCKSGRP -j REJECT"
+
+echo " > Spawning Skype as group socksgrp, to allow the above rules to filter it. It prompts for group password."
+sg $SOCKSGRP "$SKYPEBIN &"
+
+echo " > Et Voila! Make sure Skype is configured for SOCKS proxy 127.0.0.1:$SSH_PORT"
