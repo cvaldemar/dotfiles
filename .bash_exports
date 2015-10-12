@@ -1,0 +1,6 @@
+# Go
+export GOROOT="/usr/local/go"
+export GOPATH="$HOME/Workspace/gocode"
+
+# Set PATH
+PATH="$PATH:$GOROOT/bin:$HOME/.composer/vendor/bin:$GOPATH/bin"
