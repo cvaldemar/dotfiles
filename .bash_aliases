@@ -5,4 +5,8 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias json='python -m json.tool'
 alias cb='xclip -sel clip'
 alias cidr='whois `curl -s ipinfo.io/ip` | grep inetnum | grep -oE "([0-9]{1,3}[\.]){3}[0-9]{1,3}\s-\s([0-9]{1,3}[\.]){3}[0-9]{1,3}" | xargs ipcalc'
+alias art='php artisan'
 
+function mysql() {
+    docker exec -it dev_mariadb_1 /bin/sh -c "mysql -uroot -proot $@"
+}
