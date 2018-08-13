@@ -1,3 +1,12 @@
+# Git
+alias gd='git diff'
+alias gs='git status'
+alias gp='git pull'
+alias gaa='git add -a'
+alias gc='git commit'
+alias gca='git commit -a'
+
+# Basic directory
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'

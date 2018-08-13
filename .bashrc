@@ -79,3 +79,5 @@ if ! shopt -oq posix; then
   fi
 fi
 
+. /etc/profile.d/vte.sh
+

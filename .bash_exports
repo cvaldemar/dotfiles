@@ -3,7 +3,8 @@ export GOROOT="/usr/local/go"
 export GOPATH="$HOME/Workspace/gocode"
 
 # Set PATH
-PATH="$PATH:$GOROOT/bin:$HOME/.composer/vendor/bin:$GOPATH/bin"
+PATH="$PATH:$GOROOT/bin:$HOME/.composer/vendor/bin:$GOPATH/bin:$PATH/.npm-global/bin"
 
 # Add towoo-cli
 PATH="$PATH:$HOME/Workspace/towoo/cli/bin"
+
