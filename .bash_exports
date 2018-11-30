@@ -3,7 +3,10 @@ export GOROOT="/usr/local/go"
 export GOPATH="$HOME/Workspace/gocode"
 
 # Set PATH
-PATH="$PATH:$GOROOT/bin:$HOME/.composer/vendor/bin:$GOPATH/bin:$PATH/.npm-global/bin"
+PATH="$PATH:$GOROOT/bin:$HOME/.config/composer/vendor/bin:$HOME/.npm-global/bin"
+
+# Add Spark to path
+PATH="$PATH:$HOME/Workspace/src/spark-installer"
 
 # Add towoo-cli
 PATH="$PATH:$HOME/Workspace/towoo/cli/bin"
